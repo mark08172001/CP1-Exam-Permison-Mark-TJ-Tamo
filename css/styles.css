@@ -1,0 +1,323 @@
+/* Header Styles */
+header {
+  background-color: #053b00;
+  color: #fff;
+  padding: 10px 0;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+}
+
+/* Footer Styles */
+footer {
+  background-color: #053b00;
+  color: #fff;
+  padding: 10px 0;
+  text-align: center;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
+
+footer p {
+  margin: 0;
+}
+
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #ffffff;
+  margin: 0;
+  padding: 0;
+  padding-bottom: 40px;
+}
+
+main {
+  padding: 20px;
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+}
+
+/* Form Styles */
+form {
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form h2 {
+  margin-bottom: 20px;
+}
+
+form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+form input[type="text"],
+form input[type="password"],
+form input[type="date"],
+form textarea {
+  width: calc(100% - 22px);
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+form button {
+  width: 100%;
+  padding: 10px;
+  background: #053b00;
+  border: none;
+  border-radius: 4px;
+  color: #053b00;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+form button:hover {
+  background: #218838;
+}
+
+form p {
+  text-align: center;
+}
+
+/* Table Styles */
+table {
+  width: 90%;
+  margin: 20px auto;
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid #ddd;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+/* Navigation Styles */
+nav {
+  text-align: center;
+  margin: 20px;
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin: 0 10px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #053b00;
+}
+
+nav ul li a:hover {
+  text-decoration: underline;
+}
+
+/* Link Styles */
+a {
+  color: #053b00;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Back Button Styles */
+.back-button {
+  display: inline-block;
+  margin: 20px;
+  padding: 10px 20px;
+  background: #053b00;
+  color: #053b00;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.back-button:hover {
+  background: #ffffff;
+}
+
+/* Back Button */
+.back-button {
+  position: relative;
+  padding: 10px 20px;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  transition: .3s;
+  transition-delay: .3s;
+  z-index: 0;
+}
+
+.back-button::after {
+  position: absolute;
+  content: '';
+  width: 17px;
+  height: 17px;
+  background-color: #74ce0e;
+  right: -20px;
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: .3s;
+  opacity: 0;
+}
+
+.back-button::before {
+  position: absolute;
+  z-index: 0;
+  content: '';
+  width: 17px;
+  height: 17px;
+  background-color: #74ce0e;
+  left: -20px;
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: .3s;
+  opacity: 0;
+}
+
+.back-button:hover::after {
+  z-index: -1;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  border-radius: 0;
+  opacity: 1;
+}
+
+.back-button:hover::before {
+  z-index: -1;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  border-radius: 0;
+  opacity: 1;
+}
+
+.back-button:hover {
+  color: #fff;
+  box-shadow: 10px 50px 50px rgba(251, 255, 0, 0.2);
+}
+
+/* Form Button */
+form button {
+  position: relative;
+  padding: 10px 20px;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  transition: .3s;
+  transition-delay: .3s;
+  z-index: 0;
+}
+
+form button::after {
+  position: absolute;
+  content: '';
+  width: 17px;
+  height: 17px;
+  background-color: #74ce0e;
+  right: -20px;
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: .3s;
+  opacity: 0;
+}
+
+form button::before {
+  position: absolute;
+  z-index: 0;
+  content: '';
+  width: 17px;
+  height: 17px;
+  background-color: #74ce0e;
+  left: -20px;
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: .3s;
+  opacity: 0;
+}
+
+form button:hover::after {
+  z-index: -1;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  border-radius: 0;
+  opacity: 1;
+}
+
+form button:hover::before {
+  z-index: -1;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  border-radius: 0;
+  opacity: 1;
+}
+
+form button:hover {
+  color: #fff;
+  box-shadow: 10px 50px 50px rgba(251, 255, 0, 0.2);
+}
+
+/* Gender */
+form select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+form input[type="text"], form input[type="date"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+
+
+
