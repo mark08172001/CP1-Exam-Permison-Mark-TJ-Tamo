@@ -111,6 +111,23 @@ th, td {
 
 th {
   background-color: #f2f2f2;
+  color: #053b00;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tr:hover {
+  background-color: #f1f1f1;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.table-container table {
+  min-width: 600px;
 }
 
 /* Navigation Styles */
@@ -317,7 +334,4 @@ form input[type="text"], form input[type="date"] {
   border-radius: 4px;
   box-sizing: border-box;
 }
-
-
-
 

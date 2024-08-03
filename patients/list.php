@@ -17,6 +17,8 @@ $result = $conn->query($sql);
     <meta charset="UTF-8">
     <title>Patients List</title>
     <link rel="stylesheet" href="../css/styles.css">
+    <link rel="icon" type="logo.png" href="../images/logo.png">
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -47,14 +49,26 @@ $result = $conn->query($sql);
         .sidebar {
             width: 230px;
             background-color: #f4f4f4;
-            background-image: url('https://bghmc.doh.gov.ph/wp-content/uploads/2016/10/payward-500x356.jpg'); 
-            background-size: cover;
             padding: 15px;
             box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
             height: 100vh;
             position: fixed;
             top: 80px; 
             left: 0;
+            overflow: hidden;
+        }
+
+        .sidebar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('../images/b.jpg');
+            background-size: cover;
+            opacity: 0.2;
+            z-index: -1;
         }
 
         .sidebar nav a {
@@ -63,6 +77,8 @@ $result = $conn->query($sql);
             padding: 10px;
             text-decoration: none;
             margin-bottom: 5px;
+            position: relative;
+            z-index: 1;
         }
 
         .sidebar nav a:hover {
@@ -70,26 +86,46 @@ $result = $conn->query($sql);
         }
 
         main {
-            margin-left: 220px; 
+            margin-left: 230px; 
             padding: 100px 20px 20px; 
             flex-grow: 1;
         }
 
         table {
             width: 90%;
+            margin: 20px auto;
             border-collapse: collapse;
-            margin-top: 5px;
-           
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ddd;
         }
 
         th, td {
-            border: 1px solid #ddd;
-            padding: 10px;
+            padding: 12px 15px;
             text-align: center;
+            border-bottom: 1px solid #ddd;
         }
 
         th {
-            background-color: #f2f2f2;
+            background-color: #053b00;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        .table-container table {
+            min-width: 600px;
         }
 
         footer {
@@ -102,12 +138,29 @@ $result = $conn->query($sql);
             bottom: 0;
             left: 0;
         }
+
+        /* Search Bar */
+        .search-bar {
+            width: 90%;
+            margin: 20px auto;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .search-bar input {
+            padding: 10px;
+            font-size: 16px;
+            width: 100%;
+            max-width: 300px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
     <header>
         <div class="container">
-            <img src="../bg.png" alt="Hospital Logo" style="height:  60px; vertical-align: middle; margin-right: 20px;">
+            <img src="../images/bg.png" alt="Hospital Logo" style="height: 60px; vertical-align: middle; margin-right: 20px;">
             <h1 style="display: inline-block; vertical-align: middle;"> Patients List</h1>
         </div>
     </header>
@@ -120,46 +173,72 @@ $result = $conn->query($sql);
     </div>
 
     <main>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Last Name</th>
-                    <th>First Name</th>
-                    <th>Middle Name</th>
-                    <th>Gender</th>
-                    <th>Date of Birth</th>
-                    <th>Address</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php while($row = $result->fetch_assoc()): ?>
-                <tr>
-                    <td><?php echo $row['patient_id']; ?></td>
-                    <td><?php echo $row['last_name']; ?></td>
-                    <td><?php echo $row['first_name']; ?></td>
-                    <td><?php echo $row['middle_name']; ?></td>
-                    <td><?php echo $row['gender']; ?></td>
-                    <td><?php echo $row['date_of_birth']; ?></td>
-                    <td><?php echo $row['address']; ?></td>
-                    <td>
-                        <a href="edit.php? id=<?php echo $row['patient_id']; ?>" class="back-button" >Update</a>
-                        <a href="javascript:void(0);" onclick="confirmDelete(<?php echo $row['patient_id']; ?>)" class="back-button">Delete</a>
-                    </td>
-                </tr>
-                <?php endwhile; ?>
-            </tbody>
-        </table>
+        <div class="search-bar">
+            <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Search Patients">
+        </div>
+        <div class="table-container">
+            <table id="patientTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Last Name</th>
+                        <th>First Name</th>
+                        <th>Middle Name</th>
+                        <th>Gender</th>
+                        <th>Date of Birth</th>
+                        <th>Address</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php while($row = $result->fetch_assoc()): ?>
+                    <tr>
+                        <td><?php echo $row['patient_id']; ?></td>
+                        <td><?php echo $row['last_name']; ?></td>
+                        <td><?php echo $row['first_name']; ?></td>
+                        <td><?php echo $row['middle_name']; ?></td>
+                        <td><?php echo $row['gender']; ?></td>
+                        <td><?php echo $row['date_of_birth']; ?></td>
+                        <td><?php echo $row['address']; ?></td>
+                        <td>
+                            <a href="edit.php?id=<?php echo $row['patient_id']; ?>" class="back-button">Update</a>
+                            <a href="javascript:void(0);" onclick="confirmDelete(<?php echo $row['patient_id']; ?>)" class="back-button">Delete</a>
+                        </td>
+                    </tr>
+                    <?php endwhile; ?>
+                </tbody>
+            </table>
+        </div>
     </main>
 
     <footer>
         <div class="container">
-        <p>&copy; 2024 Baguio General Hospital and Medical Center. All rights reserved.</p>
+            <p>&copy; 2024 Baguio General Hospital and Medical Center. All rights reserved.</p>
         </div>
     </footer>
 
     <script>
+        function searchTable() {
+            var input, filter, table, tr, td, i, j, txtValue;
+            input = document.getElementById("searchInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("patientTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 1; i < tr.length; i++) {
+                tr[i].style.display = "none";
+                td = tr[i].getElementsByTagName("td");
+                for (j = 0; j < td.length; j++) {
+                    if (td[j]) {
+                        txtValue = td[j].textContent || td[j].innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
         function confirmDelete(patientId) {
             if (confirm("Are you sure you want to delete this patient?")) {
                 window.location.href = 'delete.php?id=' + patientId;

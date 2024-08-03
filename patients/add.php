@@ -34,6 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <title>Create Patient</title>
     <link rel="stylesheet" href="../css/styles.css">
+    <link rel="icon" type="logo.png" href="../images/logo.png">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -64,14 +65,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         .sidebar {
             width: 230px;
             background-color: #f4f4f4;
-            background-image: url('https://bghmc.doh.gov.ph/wp-content/uploads/2016/10/payward-500x356.jpg'); 
-            background-size: cover;
             padding: 15px;
             box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
             height: 100vh;
             position: fixed;
-            top: 80px;
+            top: 80px; 
             left: 0;
+            overflow: hidden;
+        }
+
+        .sidebar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('../images/b.jpg');
+            background-size: cover;
+            opacity: 0.2;
+            z-index: -1;
         }
 
         .sidebar nav a {
@@ -143,7 +156,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body>
     <header>
         <div class="container">
-            <img src="../bg.png" alt="Hospital Logo" style="height:  60px; vertical-align: middle; margin-right: 20px;">
+            <img src="../images/bg.png" alt="Hospital Logo" style="height:  60px; vertical-align: middle; margin-right: 20px;">
             <h1 style="display: inline-block; vertical-align: middle;">Create Patient</h1>
         </div>
     </header>
@@ -167,7 +180,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <select name="gender" required>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
-                <option value="Other">Other</option>
             </select>
             <label>Date of Birth:</label>
             <input type="date" name="date_of_birth" id="date_of_birth" required>

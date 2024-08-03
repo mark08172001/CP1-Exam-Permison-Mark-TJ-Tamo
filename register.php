@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         header('Location: login.php');
         exit();
     } else {
-        $error = "Registration failed. Username might be taken.";
+        $error = "Registration failed. Username is taken.";
     }
 }
 ?>
@@ -17,20 +17,104 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <header>
-        <div class="container">
-        <img src="bg.png" alt="Hospital Logo" style="height:  60px; vertical-align: middle; margin-right: 20px;">
-        <h1 style="display: inline-block; vertical-align: middle;">Baguio General Hospital and Medical Center</h1>
-        </div>
-    </header>
     <meta charset="UTF-8">
     <title>Register</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        header {
+            background-color: #053b00;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        form {
+            width: 90%;
+            margin: 200px auto 20px auto;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #f4f4f4;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        label, input, button {
+            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #053b00;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #045000;
+        }
+
+        footer {
+            background-color: #053b00;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+        }
+
+        p.error {
+            color: red;
+        }
+
+        p a {
+            color: #053b00;
+            text-decoration: none;
+        }
+
+        p a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
+    <header>
+        <div class="container">
+            <img src="images/bg.png" alt="Hospital Logo" style="height: 60px; vertical-align: middle; margin-right: 20px;">
+            <h1 style="display: inline-block; vertical-align: middle;">Baguio General Hospital and Medical Center</h1>
+        </div>
+    </header>
+
     <form method="POST" action="">
         <h2>Register</h2>
-        <?php if (isset($error)) echo "<p>$error</p>"; ?>
+        <?php if (isset($error)) echo "<p class='error'>$error</p>"; ?>
         <label>Username:</label>
         <input type="text" name="username" required>
         <label>Password:</label>
